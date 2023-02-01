@@ -72,7 +72,7 @@ const handleResetPwd = async (req, res) => {
             const result = await resetPwdUser.save();
 
             const trasporter = nodemailer.createTransport({
-                service:'hotmail',
+                service:'gmail',
                 auth:{
                     user:process.env.EMAIL,
                     pass:process.env.EMAIL_PASSWORD
@@ -82,7 +82,7 @@ const handleResetPwd = async (req, res) => {
             const mailOptions = {
                 from:process.env.EMAIL,
                 to:email,
-                subject: 'AudiFill',
+                subject: 'AudiBK',
                 html:`
                 <!DOCTYPE html>
                 <html lang="en">
