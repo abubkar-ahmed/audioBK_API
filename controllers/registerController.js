@@ -81,8 +81,6 @@ const handleNewUser = async (req , res) => {
                 pass:process.env.EMAIL_PASSWORD
             }
         })
-        console.log(process.env.EMAIL)
-        console.log(process.env.EMAIL_PASSWORD)
     
         const mailOptions = {
             from:process.env.EMAIL,
