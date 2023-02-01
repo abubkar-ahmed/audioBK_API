@@ -75,10 +75,11 @@ const handleNewUser = async (req , res) => {
 
         
         const trasporter = nodemailer.createTransport({
+            pool: true,
             host :'smtp.office365.com',
+            port: 465,
+            secure: true,
             service:'hotmail',
-            port : 587,
-            secure: false,
             auth:{
                 user:process.env.EMAIL,
                 pass:process.env.EMAIL_PASSWORD
