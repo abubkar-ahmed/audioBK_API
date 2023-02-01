@@ -85,7 +85,7 @@ const handleNewUser = async (req , res) => {
         const mailOptions = {
             from:process.env.EMAIL,
             to:email,
-            subject: 'AudiFill',
+            subject: 'AudiBK',
             html:`
             <!DOCTYPE html>
             <html lang="en">
