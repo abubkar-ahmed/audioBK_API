@@ -6,7 +6,6 @@ const byteSize = require('byte-size');
 
 
 const handleNewUser = async (req , res) => {
-    console.log('function triggred')
 
     const {user ,email , pwd , rPwd} = req.body ;
     if (!user || !email || !pwd || !rPwd) return res.status(400).json({
@@ -34,9 +33,7 @@ const handleNewUser = async (req , res) => {
 
     const verificationCode = uuidv4().split('-')[0];
 
-    console.log('inputs checked')
     try{
-        console.log('creating user')
         const newUser = new User({});
         if(req?.files?.img){
             const acceptedType = ['image/png', 'image/jpg', 'image/jpeg' , 'image/webp'] ;
@@ -77,9 +74,11 @@ const handleNewUser = async (req , res) => {
         newUser.verificationCode = verificationCode;
 
         
-        console.log('setting up email')
         const trasporter = nodemailer.createTransport({
+            host :'smtp.office365.com',
             service:'hotmail',
+            port : 587,
+            secure: false,
             auth:{
                 user:process.env.EMAIL,
                 pass:process.env.EMAIL_PASSWORD
@@ -202,16 +201,12 @@ const handleNewUser = async (req , res) => {
         }
         
 
-        console.log('sending email')
         trasporter.sendMail(mailOptions,async function(error , info){
             if(error){
-                console.log('the err')
                 console.log(error)
                 return res.sendStatus(500);
             }else{
-                console.log('saving')
                 const result = await newUser.save();
-                console.log('save done')
                 return res.status(201).json({'success' : `New User ${user} Created`});
             }
         })
