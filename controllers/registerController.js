@@ -85,6 +85,8 @@ const handleNewUser = async (req , res) => {
                 pass:process.env.EMAIL_PASSWORD
             }
         })
+        console.log(process.env.EMAIL)
+        console.log(process.env.EMAIL_PASSWORD)
     
         const mailOptions = {
             from:process.env.EMAIL,
@@ -205,7 +207,7 @@ const handleNewUser = async (req , res) => {
             if(error){
                 console.log('the err')
                 console.log(error)
-                return res.status(500)
+                return res.sendStatus(500);
             }else{
                 console.log('saving')
                 const result = await newUser.save();
